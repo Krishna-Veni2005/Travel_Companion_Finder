@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}My Searches - Travel Companion Finder{% endblock %}
+
+{% block content %}
+<h2>My Searches</h2>
+
+<div class="container">
+    {% if search_matches %}
+        {% for item in search_matches %}
+            <div class="search-card">
+                <div class="search-header">
+                    <div class="search-title">{{ item.search.destination }}</div>
+                    <form action="{{ url_for('delete_search', id=item.search.id) }}" method="POST">
+                        <button type="submit" class="search-delete">Delete</button>
+                    </form>
+                </div>
+
+                <div class="search-details">
+                    <div class="search-detail">
+                        <span class="detail-label">Travel Date</span>
+                        <span class="detail-value">{{ item.search.travel_date }}</span>
+                    </div>
+                    
+                    {% if item.search.gender %}
+                    <div class="search-detail">
+                        <span class="detail-label">Gender Preference</span>
+                        <span class="detail-value">{{ item.search.gender }}</span>
+                    </div>
+                    {% endif %}
+                    
+                    {% if item.search.interests %}
+                    <div class="search-detail">
+                        <span class="detail-label">Interests</span>
+                        <span class="detail-value">{{ item.search.interests }}</span>
+                    </div>
+                    {% endif %}
+                    
+                    {% if item.search.origin_city %}
+                    <div class="search-detail">
+                        <span class="detail-label">Origin City</span>
+                        <span class="detail-value">{{ item.search.origin_city }}</span>
+                    </div>
+                    {% endif %}
+                    
+                    {% if item.search.companion_type %}
+                    <div class="search-detail">
+                        <span class="detail-label">Companion Type</span>
+                        <span class="detail-value">{{ item.search.companion_type }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="matches-section">
+                    <div class="matches-header">Matching Travelers</div>
+                    
+                    {% if item.matches %}
+                        {% for match in item.matches %}
+                            <div class="match-card">
+                                <div class="match-username">{{ match.username }}</div>
+                                
+                                <div class="match-details">
+                                    {% if match.gender %}
+                                    <div class="search-detail">
+                                        <span class="detail-label">Gender</span>
+                                        <span class="detail-value">{{ match.gender }}</span>
+                                    </div>
+                                    {% endif %}
+                                    
+                                    {% if match.interests %}
+                                    <div class="search-detail">
+                                        <span class="detail-label">Interests</span>
+                                        <span class="detail-value">{{ match.interests }}</span>
+                                    </div>
+                                    {% endif %}
+                                    
+                                    {% if match.origin_city %}
+                                    <div class="search-detail">
+                                        <span class="detail-label">Origin City</span>
+                                        <span class="detail-value">{{ match.origin_city }}</span>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                
+                                <form action="{{ url_for('send_request', receiver_id=match.user_id) }}" method="POST">
+                                    <button type="submit" class="connect-btn">Connect</button>
+                                </form>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="no-matches">No matches found for this search.</div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="no-searches">
+            You haven't made any searches yet. Go to the home page to search for travel companions.
+        </div>
+    {% endif %}
+</div>
+
+<a href="{{ url_for('home') }}" class="back-button">Back to Home</a>
+{% endblock %}

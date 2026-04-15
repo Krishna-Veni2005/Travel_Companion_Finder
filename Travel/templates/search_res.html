@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Search Results - Travel Companion Finder{% endblock %}
+
+{% block content %}
+<h2>Search Results for "{{ destination }}"</h2>
+
+<div class="search-results">
+    {% if travelers %}
+        {% for traveler in travelers %}
+            <div class="match-card">
+                <div class="match-username">{{ traveler.username }}</div>
+                <div class="match-details">
+                    <div class="match-detail">
+                        <span class="detail-label">Destination</span>
+                        <span class="detail-value">{{ traveler.destination }}</span>
+                    </div>
+                    <div class="match-detail">
+                        <span class="detail-label">Travel Date</span>
+                        <span class="detail-value">{{ traveler.travel_date }}</span>
+                    </div>
+                    {% if traveler.gender %}
+                        <div class="match-detail">
+                            <span class="detail-label">Gender</span>
+                            <span class="detail-value">{{ traveler.gender }}</span>
+                        </div>
+                    {% endif %}
+                    {% if traveler.interests %}
+                        <div class="match-detail">
+                            <span class="detail-label">Interests</span>
+                            <span class="detail-value">{{ traveler.interests }}</span>
+                        </div>
+                    {% endif %}
+                    {% if traveler.origin_city %}
+                        <div class="match-detail">
+                            <span class="detail-label">Origin</span>
+                            <span class="detail-value">{{ traveler.origin_city }}</span>
+                        </div>
+                    {% endif %}
+                    {% if traveler.companion_type %}
+                        <div class="match-detail">
+                            <span class="detail-label">Companion Type</span>
+                            <span class="detail-value">{{ traveler.companion_type }}</span>
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Friend request button (only show if not yourself and not already friends) -->
+                <form action="{{ url_for('send_request', receiver_id=traveler.user_id) }}" method="POST">
+                    <button type="submit" class="connect-btn">Connect</button>
+                </form>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="no-results">
+            No matching travelers found for your search criteria.
+        </div>
+    {% endif %}
+</div>
+
+<a href="{{ url_for('home') }}" class="back-button">Back to Home</a>
+{% endblock %}

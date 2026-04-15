@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Travel Companion Finder{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <h2>Login</h2>
+    
+    <form method="POST" class="auth-form">
+        <input type="email" name="email" placeholder="Email" required>
+        <div class="password-container">
+            <input type="password" name="password" id="password" placeholder="Password" required>
+            <button type="button" class="password-toggle" onclick="togglePassword()">
+                <svg class="eye-icon" id="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path class="eye-slash" id="eye-slash" d="M2 2l20 20" style="display: none;"></path>
+                </svg>
+            </button>
+        </div>
+        <button type="submit" class="btn-primary">Login</button>
+    </form>
+    
+    <p class="auth-link">Don't have an account? <a href="{{ url_for('register') }}">Register here</a></p>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function togglePassword() {
+        const passwordField = document.getElementById('password');
+        const eyeSlash = document.getElementById('eye-slash');
+        
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            eyeSlash.style.display = 'inline';
+        } else {
+            passwordField.type = 'password';
+            eyeSlash.style.display = 'none';
+        }
+    }
+</script>
+{% endblock %}

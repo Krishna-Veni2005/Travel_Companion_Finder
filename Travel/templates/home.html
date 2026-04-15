@@ -1,0 +1,147 @@
+{% extends "base.html" %}  
+
+{% block title %}Home - Travel Companion Finder{% endblock %}  
+
+{% block head_extras %}
+<style>
+    body {
+        background-image: url("{{ url_for('static', filename='background.png') }}");
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .container {
+        flex: 1;
+        display: flex;
+        padding: 20px;
+    }
+    
+    .sidebar {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 8px;
+        margin-right: 20px;
+        width: 300px;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+    }
+    
+    .site-header {
+        background-color: #c343d7;
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+    
+    .site-header nav ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .site-header nav ul li {
+        margin: 0 15px;
+    }
+    
+    .site-header nav ul li a {
+        color: white;
+        text-decoration: none;
+    }
+    
+    .site-footer {
+        background-color: #c343d7;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        margin-top: auto;
+    }
+    
+    .search-form {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .search-form input,
+    .search-form select,
+    .search-form button {
+        margin-bottom: 10px;
+        padding: 8px;
+    }
+    
+    .btn-primary {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+    .site-header h1 {
+        color: white;
+    }
+    .username-display {
+        margin-bottom: 15px;
+        font-style: italic;
+    }
+</style>
+{% endblock %}
+
+{% block header %} 
+<header class="site-header">
+    <h1>Welcome to Travel Companion Finder!</h1>
+    <div class="username-display">
+        Hello, {{ username }}!
+    </div>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('profile') }}">Profile</a></li>
+            <li><a href="{{ url_for('my_searches') }}">My Searches</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+    </nav>
+</header> 
+{% endblock %}  
+
+{% block content %} 
+<div class="sidebar">
+    <h3>Find Companions</h3>
+    <form method="POST" action="{{ url_for('search') }}" class="search-form">
+        <input type="text" name="destination" placeholder="Destination" required>
+        
+        <label>Travel Date:</label>
+        <input type="date" name="start_date" required>
+        <input type="date" name="end_date">
+        
+        <select name="gender">
+            <option value="">Any Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+        
+        <input type="number" name="min_age" placeholder="Min Age">
+        <input type="number" name="max_age" placeholder="Max Age">
+        
+        <input type="text" name="interests" placeholder="Interests">
+        <input type="text" name="origin_city" placeholder="Origin City">
+        
+        <select name="companion_type">
+            <option value="">Any Type</option>
+            <option value="Solo">Solo</option>
+            <option value="Group">Group</option>
+            <option value="Couple">Couple</option>
+        </select>
+        
+        <button type="submit" class="btn-primary">Search</button>
+    </form>
+</div>
+    
+{% endblock %}
+
+{% block footer %}
+<p>&copy; 2023 Travel Companion Finder. All rights reserved.</p>
+{% endblock %}
