@@ -47,6 +47,7 @@ class User(UserMixin, db.Model):
     destination = db.Column(db.String(150))
     travel_date = db.Column(db.Date)
     profile_completed = db.Column(db.Boolean, default=False)  # New field to track profile completion
+    is_public = db.Column(db.Boolean, default=False)
 
     # Users that this user has friended
     friends = db.relationship(
@@ -184,6 +185,7 @@ def profile():
         phone = request.form['phone']
         gender = request.form['gender']
         dob_str = request.form['dob']
+        is_public = request.form.get('is_public') == 'on'
         
         # Validate required fields
         if not phone or not gender or not dob_str:
@@ -200,6 +202,7 @@ def profile():
         current_user.phone = phone
         current_user.gender = gender
         current_user.dob = dob
+        current_user.is_public = is_public
         current_user.profile_completed = True
         db.session.commit()
         
@@ -269,6 +272,18 @@ def chat(user_id):
     other_user = User.query.get_or_404(user_id)
     messages = Message.query.filter_by(receiver_id=user_id).all()
     return render_template('chat.html', other_user=other_user, messages=messages)
+
+
+@app.route('/public-profiles')
+@login_required
+def public_profiles():
+    # Check if profile is completed
+    if not current_user.profile_completed:
+        flash('Please complete your profile first.', 'warning')
+        return redirect('/profile')
+        
+    public_users = User.query.filter(User.is_public == True, User.id != current_user.id).all()
+    return render_template('public_profiles.html', public_users=public_users)
 
 
 @app.route('/my-searches')

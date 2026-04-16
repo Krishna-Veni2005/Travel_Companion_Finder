@@ -43,6 +43,16 @@
                             <span class="detail-value">{{ traveler.companion_type }}</span>
                         </div>
                     {% endif %}
+                    {% if traveler.user and traveler.user.is_public %}
+                        <div class="match-detail" style="border-top: 1px solid #eee; padding-top: 10px; margin-top: 5px; grid-column: 1 / -1;">
+                            <span class="detail-label" style="color: #c343d7;">Public Profile Info</span>
+                            <span class="detail-value" style="margin-top: 5px;">
+                                📞 {{ traveler.user.phone }} &nbsp;|&nbsp; 
+                                👤 {{ traveler.user.gender }} &nbsp;|&nbsp; 
+                                🎂 {{ traveler.user.dob.strftime('%Y-%m-%d') if traveler.user.dob else 'N/A' }}
+                            </span>
+                        </div>
+                    {% endif %}
                 </div>
                 
                 <!-- Friend request button (only show if not yourself and not already friends) -->

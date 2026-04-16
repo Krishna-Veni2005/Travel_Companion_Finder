@@ -232,6 +232,12 @@
         <input type="date" id="dob" name="dob" class="required-field" required
                value="{{ user.dob if user.dob }}">
 
+        <label class="required-label" for="is_public" style="margin-top: 15px; cursor: pointer; display: flex; align-items: center;">
+            <input type="checkbox" id="is_public" name="is_public" style="width: auto; margin-right: 10px; margin-bottom: 0;" {% if user.is_public %}checked{% endif %}>
+            Make Profile Public
+        </label>
+        <p style="font-size: 0.8em; color: #666; margin-bottom: 20px; margin-top: 5px; line-height: 1.4;">If public, other users will be able to see your phone number, gender, and date of birth in search results.</p>
+
         <button type="submit">Update Profile</button>
     </form>
 

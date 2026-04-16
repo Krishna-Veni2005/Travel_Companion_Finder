@@ -34,22 +34,62 @@
         color: white;
         padding: 20px;
         text-align: center;
+        position: relative;
     }
     
-    .site-header nav ul {
+    .hamburger-btn {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 28px;
+        cursor: pointer;
+        z-index: 1000;
+    }
+    
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 20px;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        border-radius: 5px;
+        min-width: 150px;
+        z-index: 999;
+        text-align: left;
+    }
+    
+    .dropdown-menu.show {
+        display: block;
+    }
+    
+    .dropdown-menu ul {
         list-style: none;
         padding: 0;
-        display: flex;
-        justify-content: center;
+        margin: 0;
     }
     
-    .site-header nav ul li {
-        margin: 0 15px;
+    .dropdown-menu ul li {
+        border-bottom: 1px solid #eee;
     }
     
-    .site-header nav ul li a {
-        color: white;
+    .dropdown-menu ul li:last-child {
+        border-bottom: none;
+    }
+    
+    .dropdown-menu ul li a {
+        display: block;
+        padding: 12px 20px;
+        color: #333;
         text-decoration: none;
+    }
+    
+    .dropdown-menu ul li a:hover {
+        background-color: #f1f1f1;
+        color: #c343d7;
     }
     
     .site-footer {
@@ -92,18 +132,39 @@
 
 {% block header %} 
 <header class="site-header">
+    <button class="hamburger-btn" onclick="toggleMenu()">☰</button>
+    <div class="dropdown-menu" id="navDropdown">
+        <ul>
+            <li><a href="{{ url_for('profile') }}">Profile</a></li>
+            <li><a href="{{ url_for('public_profiles') }}">Public Profiles</a></li>
+            <li><a href="{{ url_for('my_searches') }}">My Searches</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+    </div>
     <h1>Welcome to Travel Companion Finder!</h1>
     <div class="username-display">
         Hello, {{ username }}!
     </div>
-    <nav>
-        <ul>
-            <li><a href="{{ url_for('profile') }}">Profile</a></li>
-            <li><a href="{{ url_for('my_searches') }}">My Searches</a></li>
-            <li><a href="{{ url_for('logout') }}">Logout</a></li>
-        </ul>
-    </nav>
-</header> 
+</header>
+<script>
+    function toggleMenu() {
+        var menu = document.getElementById("navDropdown");
+        menu.classList.toggle("show");
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+        if (!event.target.matches('.hamburger-btn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-menu");
+            for (var i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script> 
 {% endblock %}  
 
 {% block content %} 

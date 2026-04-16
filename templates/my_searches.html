@@ -80,6 +80,17 @@
                                         <span class="detail-value">{{ match.origin_city }}</span>
                                     </div>
                                     {% endif %}
+                                    
+                                    {% if match.user and match.user.is_public %}
+                                    <div class="search-detail" style="border-top: 1px solid #eee; padding-top: 10px; margin-top: 5px; grid-column: 1 / -1;">
+                                        <span class="detail-label" style="color: #c343d7;">Public Profile Info</span>
+                                        <span class="detail-value" style="margin-top: 5px;">
+                                            📞 {{ match.user.phone }} &nbsp;|&nbsp; 
+                                            👤 {{ match.user.gender }} &nbsp;|&nbsp; 
+                                            🎂 {{ match.user.dob.strftime('%Y-%m-%d') if match.user.dob else 'N/A' }}
+                                        </span>
+                                    </div>
+                                    {% endif %}
                                 </div>
                                 
                                 <form action="{{ url_for('send_request', receiver_id=match.user_id) }}" method="POST">
