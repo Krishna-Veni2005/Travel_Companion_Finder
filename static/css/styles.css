@@ -91,6 +91,62 @@ nav ul li a:hover {
     margin-top: 30px;
 }
 
+/* Left Sidebar Navigation */
+.left-sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1001;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+}
+
+.left-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.left-sidebar ul li {
+    border-bottom: 1px solid #eee;
+}
+
+.left-sidebar ul li a {
+    padding: 15px 30px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #333;
+    display: block;
+    transition: 0.3s;
+}
+
+.left-sidebar ul li a:hover {
+    color: #c343d7;
+    background: #f1f1f1;
+}
+
+.left-sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    font-size: 36px;
+    margin-left: 50px;
+    color: #333;
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.left-sidebar .closebtn:hover {
+    color: #c343d7;
+    background: none;
+}
+
 /* Flash Messages */
 .flashes {
     list-style: none;
@@ -157,15 +213,17 @@ nav ul li a:hover {
 }
 
 .back-button {
-    display: block;
-    width: 120px;
-    margin: 20px auto;
-    padding: 10px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    padding: 10px 15px;
     background-color: #c343d7;
     color: white;
     text-align: center;
     text-decoration: none;
     border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
 .back-button:hover {

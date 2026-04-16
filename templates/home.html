@@ -49,49 +49,7 @@
         z-index: 1000;
     }
     
-    .dropdown-menu {
-        display: none;
-        position: absolute;
-        top: 60px;
-        left: 20px;
-        background-color: white;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        border-radius: 5px;
-        min-width: 150px;
-        z-index: 999;
-        text-align: left;
-    }
-    
-    .dropdown-menu.show {
-        display: block;
-    }
-    
-    .dropdown-menu ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-    
-    .dropdown-menu ul li {
-        border-bottom: 1px solid #eee;
-    }
-    
-    .dropdown-menu ul li:last-child {
-        border-bottom: none;
-    }
-    
-    .dropdown-menu ul li a {
-        display: block;
-        padding: 12px 20px;
-        color: #333;
-        text-decoration: none;
-    }
-    
-    .dropdown-menu ul li a:hover {
-        background-color: #f1f1f1;
-        color: #c343d7;
-    }
-    
+
     .site-footer {
         background-color: #c343d7;
         color: white;
@@ -132,8 +90,9 @@
 
 {% block header %} 
 <header class="site-header">
-    <button class="hamburger-btn" onclick="toggleMenu()">☰</button>
-    <div class="dropdown-menu" id="navDropdown">
+    <button class="hamburger-btn" onclick="openNav()">☰</button>
+    <div id="mySidebar" class="left-sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <ul>
             <li><a href="{{ url_for('profile') }}">Profile</a></li>
             <li><a href="{{ url_for('public_profiles') }}">Public Profiles</a></li>
@@ -147,21 +106,18 @@
     </div>
 </header>
 <script>
-    function toggleMenu() {
-        var menu = document.getElementById("navDropdown");
-        menu.classList.toggle("show");
+    function openNav() {
+        document.getElementById("mySidebar").style.width = "250px";
     }
 
-    // Close the dropdown if the user clicks outside of it
+    function closeNav() {
+        document.getElementById("mySidebar").style.width = "0";
+    }
+
+    // Close the sidebar if the user clicks outside of it
     window.onclick = function(event) {
-        if (!event.target.matches('.hamburger-btn')) {
-            var dropdowns = document.getElementsByClassName("dropdown-menu");
-            for (var i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                }
-            }
+        if (!event.target.matches('.hamburger-btn') && !event.target.closest('.left-sidebar')) {
+            closeNav();
         }
     }
 </script> 

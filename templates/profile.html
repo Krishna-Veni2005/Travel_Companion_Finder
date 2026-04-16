@@ -89,11 +89,7 @@
             background-color: #0069d9;
         }
 
-        .back-link {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-        }
+
 
         .flashes {
             list-style: none;
@@ -311,9 +307,7 @@
 
     <!-- Navigation and Account Management -->
     <div style="max-width: 500px; margin: 30px auto;">
-        <a href="{{ url_for('home') }}" class="back-link">
-            <button type="button">Back to Home</button>
-        </a>
+        <a href="{{ url_for('home') }}" class="back-button">Back to Home</a>
 
         <!-- Delete Account Form -->
         <form method="POST" action="/delete-account" 
