@@ -13,7 +13,12 @@ body {
     padding: 20px;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     color: #333;
     margin-top: 0;
 }
@@ -116,7 +121,8 @@ nav ul li a:hover {
     color: #856404;
 }
 
-.flashes .error, .flashes .danger {
+.flashes .error,
+.flashes .danger {
     background-color: #f8d7da;
     color: #721c24;
 }
@@ -177,7 +183,8 @@ nav ul li a:hover {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.auth-form input, .auth-form select {
+.auth-form input,
+.auth-form select {
     width: 100%;
     padding: 12px;
     margin-bottom: 15px;
@@ -200,11 +207,17 @@ nav ul li a:hover {
 .password-container {
     position: relative;
     width: 100%;
+    margin-bottom: 15px;
 }
 
-.password-toggle {
+.auth-form .password-container input {
+    margin-bottom: 0;
+    padding-right: 40px;
+}
+
+.auth-form .password-toggle {
     position: absolute;
-    right: 10px;
+    right: 12px;
     top: 50%;
     transform: translateY(-50%);
     background: none;
@@ -215,7 +228,7 @@ nav ul li a:hover {
     width: auto;
 }
 
-.password-toggle:focus {
+.auth-form .password-toggle:focus {
     outline: none;
 }
 
@@ -277,6 +290,7 @@ nav ul li a:hover {
 .match-card:hover {
     box-shadow: 0 2px 5px #c343d7;
 }
+
 .match-username {
     font-weight: bold;
     font-size: 1.1em;
@@ -291,7 +305,8 @@ nav ul li a:hover {
     margin-bottom: 15px;
 }
 
-.match-detail, .search-detail {
+.match-detail,
+.search-detail {
     display: flex;
     flex-direction: column;
 }
@@ -322,10 +337,13 @@ nav ul li a:hover {
     background-color: #a730ba;
 }
 
-.no-results, .no-searches, .no-matches, .no-items {
+.no-results,
+.no-searches,
+.no-matches,
+.no-items {
     text-align: center;
     padding: 30px;
-    color:#c343d7;
+    color: #c343d7;
     font-style: italic;
     background-color: #f9f9f9;
     border-radius: 5px;
